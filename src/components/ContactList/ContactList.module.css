@@ -1,0 +1,10 @@
+.ContactList {
+    margin-top: 10px;
+    width: 355px;
+    padding: 20px;
+    padding-top: 0;
+}
+
+.ContactList__title {
+    text-align: center;
+}

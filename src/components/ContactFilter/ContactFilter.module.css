@@ -1,0 +1,22 @@
+.ContactFilter {
+    width: 355px;
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: whitesmoke;
+}
+
+.ContactFilter__title {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+.ContactFilter__input {
+    display: block;
+    margin: 0 auto;
+    width: 280px;
+    height: 30px;
+}
