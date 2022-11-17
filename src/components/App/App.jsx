@@ -1,4 +1,4 @@
-import ContactForm from '../ContactForm/1ContactForm';
+import ContactForm from '../ContactForm/ContactForm';
 import ContactFilter from '../ContactFilter/ContactFilter';
 import ContactList from '../ContactList/ContactList';
 

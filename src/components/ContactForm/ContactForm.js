@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setContacts } from '../../redux/1contacts';
+import { setContacts } from '../../redux/contacts';
 
 export default function ContactForm() {
 
