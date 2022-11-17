@@ -1,84 +1,107 @@
-// import React from 'react';
-import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
-import css from './App.module.css';
-import contactsList from '../../data/contacts.json';
-
-import ContactForm from '../ContactForm/ContactForm';
+import ContactForm from '../ContactForm/1ContactForm';
 import ContactFilter from '../ContactFilter/ContactFilter';
 import ContactList from '../ContactList/ContactList';
 
-// Hooks ==========================================================================
+import css from './App.module.css';
 
-export default function App() {
+const App = () => {
+    return (
+        <div className={css.Phonebook}>
+            <h1 className={css.Phonebook__title}>Phonebook</h1>
+            <ContactForm />
 
-  // used useState instead state
-  const [contacts, setContacts] = useState(JSON.parse(window.localStorage.getItem('contactsList')) ?? contactsList); // DidMount replaced
-  const [filter, setFilter] = useState('');
-
-  // DidUpdate replaced
-  useEffect(() => {
-    window.localStorage.setItem('contactsList', JSON.stringify(contacts));
-  }, [contacts]);
-
-  // used setContacts instead setState
-  const addContact = (name, number) => {
-    const normalizedNameInput = name.toLowerCase();
-    const matchByName = contacts.find(contact => contact.name.toLowerCase() === normalizedNameInput);
-
-    if (matchByName) {
-      alert(`${name} is already in contacts`);
-    } else {
-      const contact = {
-        id: nanoid(),
-        name: name,
-        number: number,
-      };
-
-      setContacts((contacts) => ([contact, ...contacts]));
-    }
-  };
-
-  // used setFilter instead setState 
-  const changeFilter = event => {
-    setFilter(filter => event.target.value);
-  };
-
-  const filteredContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name
-        .toLowerCase()
-        .includes(normalizedFilter),
+            <h2 className={css.Phonebook__title}>Contacts</h2>
+            <ContactFilter />
+            <ContactList />            
+        </div>
     );
-  };
-
-  const deleteContact = (contactId) => { 
-    setContacts((contacts) => (contacts.filter(contact => contact.id !== contactId)));
-  };
-  
-  return (
-    <div className={css.Phonebook}>
-      <h1 className={css.Phonebook__title}>Phonebook</h1>
-      
-      <ContactForm
-        onSubmit={addContact}
-      />
-
-      <h2 className={css.Phonebook__title}>Contacts</h2>
-      
-      <ContactFilter
-        filter={filter}
-        onFilter={changeFilter}
-      />
-      
-      <ContactList
-        contacts={filteredContacts}
-        onDeleteContact={deleteContact}
-      />
-    </div>
-  );
 };
+
+export default App;
+
+// HW-04 =============================================================================
+
+// // import React from 'react';
+// import { useState, useEffect } from 'react';
+// import { nanoid } from 'nanoid';
+// import css from './App.module.css';
+// import contactsList from '../../data/contacts.json';
+
+// import ContactForm from '../ContactForm/ContactForm';
+// import ContactFilter from '../ContactFilter/ContactFilter';
+// import ContactList from '../ContactList/ContactList';
+
+// // Hooks ==========================================================================
+
+// export default function App() {
+
+//   // used useState instead state
+//   const [contacts, setContacts] = useState(JSON.parse(window.localStorage.getItem('contactsList')) ?? contactsList); // DidMount replaced
+//   const [filter, setFilter] = useState('');
+
+//   // DidUpdate replaced
+//   useEffect(() => {
+//     window.localStorage.setItem('contactsList', JSON.stringify(contacts));
+//   }, [contacts]);
+
+//   // used setContacts instead setState
+//   const addContact = (name, number) => {
+//     const normalizedNameInput = name.toLowerCase();
+//     const matchByName = contacts.find(contact => contact.name.toLowerCase() === normalizedNameInput);
+
+//     if (matchByName) {
+//       alert(`${name} is already in contacts`);
+//     } else {
+//       const contact = {
+//         id: nanoid(),
+//         name: name,
+//         number: number,
+//       };
+
+//       setContacts((contacts) => ([contact, ...contacts]));
+//     }
+//   };
+
+//   // used setFilter instead setState 
+//   const changeFilter = event => {
+//     setFilter(filter => event.target.value);
+//   };
+
+//   const filteredContacts = () => {
+//     const normalizedFilter = filter.toLowerCase();
+//     return contacts.filter(contact =>
+//       contact.name
+//         .toLowerCase()
+//         .includes(normalizedFilter),
+//     );
+//   };
+
+//   const deleteContact = (contactId) => { 
+//     setContacts((contacts) => (contacts.filter(contact => contact.id !== contactId)));
+//   };
+  
+//   return (
+//     <div className={css.Phonebook}>
+//       <h1 className={css.Phonebook__title}>Phonebook</h1>
+      
+//       <ContactForm
+//         onSubmit={addContact}
+//       />
+
+//       <h2 className={css.Phonebook__title}>Contacts</h2>
+      
+//       <ContactFilter
+//         filter={filter}
+//         onFilter={changeFilter}
+//       />
+      
+//       <ContactList
+//         contacts={filteredContacts}
+//         onDeleteContact={deleteContact}
+//       />
+//     </div>
+//   );
+// };
 
 // Live Cycles ====================================================================
 

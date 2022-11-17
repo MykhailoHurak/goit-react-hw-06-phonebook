@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 import css from './ContactForm.module.css';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,48 +8,48 @@ import { setContacts } from '../../redux/1contacts';
 
 export default function ContactForm() {
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
-    const contacts = useSelector(state => state.contacts.value);
-    const handleSubmit = event => {
-        let loginInputId = nanoid();
-        event.preventDefault();
-        const normalizedName = name.toLowerCase();
-        const checkedForName = contacts.some(
-            contact => normalizedName === contact.name.toLowerCase()
-        );
-        
-        if (checkedForName) {
-            return alert(`${name} is already in contacts`);
-        }
-        dispatch(setContacts({ id: loginInputId, name: name, number: number }));
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  const contacts = useSelector(state => state.contacts.value);
+  const handleSubmit = e => {
+    let loginInputId = nanoid();
+    e.preventDefault();
+    const normalizedName = name.toLowerCase();
+    const checkedForName = contacts.some(
+      contact => normalizedName === contact.name.toLowerCase()
+    );
 
-        reset();
-    };
+    if (checkedForName) {
+      return alert(`${name} is already in contacts`);
+    }
+    dispatch(setContacts({ id: loginInputId, name: name, number: number }));
 
-    const reset = () => {
-        setName('');
-        setNumber('');
-    };
+    reset();
+  };
 
-    const handleChange = event => {
-        const { value, name } = event.target;
+  const reset = () => {
+    setName('');
+    setNumber('');
+  };
 
-        switch (name) {
-            case 'name':
-                setName(value);
-                break;
+  const handleChange = e => {
+    const { value, name } = e.target;
 
-            case 'number':
-                setNumber(value);
-                break;
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
 
-            default:
-                break;
-        }
-    };
+      case 'number':
+        setNumber(value);
+        break;
+
+      default:
+        break;
+    }
+  };
 
     return (
         <div className={css.ContactForm}>
@@ -236,12 +237,12 @@ export default function ContactForm() {
 
 // export default ContactForm;
 
-// ContactForm.propTypes = {
-//     contacts: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             name: PropTypes.string.isRequired,
-//             number: PropTypes.string.isRequired,
-//         })
-//     ),
-//   };
+ContactForm.propTypes = {
+    contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+        })
+    ),
+  };
 
